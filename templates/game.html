@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Tic Tac Toe</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <style>
+            table {
+                border-collapse: collapse;
+                margin: 0 auto;
+            }
+            td {
+                border: 1px solid black;
+                width: 150px;
+                height: 150px;
+                font-size: 70px;
+                text-align: center;
+            }
+            td > a {
+                font-size: 70px;
+                visibility: hidden;
+            }
+            td:hover a {
+                visibility: visible;
+            }
+            h3 {
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+        <br>
+        <table>
+            {% for i in range(3) %}
+                <tr>
+                    {% for j in range(3) %}
+                        <td>
+                            {% if game[i][j] %}
+                                {{ game[i][j] }}
+                            {% else %}
+                                {% if over == False %}
+                                    <a href="{{ url_for('play', row=i, col=j) }}">{{ turn }}</a>
+                                {% endif %}
+                            {% endif %}
+                        </td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </table>
+
+        {% if over == True %}
+            {% if winner == None %}
+                <h3>It's a tie!</h3>
+            {% else %}
+                <h3>{{winner}} won!</h3
+            {% endif %}
+        {% endif %}
+        <br>
+        <center><a class="btn btn-info" style="text-align: center" href="/newgame" role="button">New Game</a></center>
+        <br>
+        <center><a class="btn btn-dark" style="text-align: center" href="/computer" role="button">Let the computer make a move</a></center>
+    </body>
+</html>
