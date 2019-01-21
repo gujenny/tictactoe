@@ -31,7 +31,7 @@ def play(row, col):
 @app.route("/newgame")
 def newgame():
     session.clear()
-    return redirect("/")
+    return redirect(url_for("index"))
 
 @app.route("/computer")
 def computerTurn():
